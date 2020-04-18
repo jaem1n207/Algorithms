@@ -10,30 +10,37 @@
 int number = 10; 	
 int data[10] = {1, 10, 5, 8 ,7, 6, 4, 3, 2, 9};
 
+void show() {
+	int i;
+	for(i = 0; i < number; i++) {
+		printf("%d ", data[i]);
+	}
+}
+
 void quickSort(int *data, int start, int end) {
 	if (start >= end) {	// 원소가 1개인 경우 
 		return; 
 	}
 	
-	int key = start;	// 키는 첫 번째 원소
+	int key = start;	// 키는 첫 번째 원소 
 	int i = start + 1;
 	int j = end;
 	int temp;
-	while(i <= j) {	// 엇갈리면 해당 while문 탈출 (엇갈리지 않을 때까지만 반복하게 됨) 
-		while(data[i] <= data[key]) {	// key 값보다 큰 값을 만날 때까지 오른쪽으로 이동 
+	while(i <= j) {	// 엇갈릴 때까지 반복 
+		while(i <= end && data[i] <= data[key]) {	// key 값보다 큰 값을 만날 때까지 
 			i++;
 		}
-		while(data[j] >= data[key] && j > start) {	// key 값보다 작은 값을 만날 때까지 반복 
+		while(j > start && data[j] >= data[key]) {	// key 값보다 작은 값을 만날 때까지 
 			j--;
 		}
 		if (i > j) {	// 현재 엇갈린 상태면 key 값 교체 
 			temp = data[j];
 			data[j] = data[key];
 			data[key] = temp; 
-		} else {	// 엇갈리지 않았다면 
-			temp = data[j];
-			data[j] = data[i];
-			data[i] = temp;
+		} else {	// 엇갈리지 않았다면 i와 j를 교체 
+			temp = data[i];
+			data[i] = data[j];
+			data[j] = temp;
 		}
 	} 
 	
@@ -43,9 +50,7 @@ void quickSort(int *data, int start, int end) {
 
 int main(void) {
 	quickSort(data, 0, number - 1);
-	for(int i = 0; i < number; i++) {
-		printf("%d ", data[i]);
-	}
+	show();
 	
 	return 0;
 }
